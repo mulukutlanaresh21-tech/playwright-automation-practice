@@ -10,10 +10,10 @@ console.log(a);
 
 //mutable
 let obj = {
-  name: "bharath",
+  name: "Naresh",
   id: 1234,
 };
-obj.age = 34;
+obj.age = 30;
 console.log(obj);
 
 //Data types in JavaScript
@@ -31,15 +31,24 @@ console.log(typeof num1);
 console.log(typeof num2);
 
 //2. string ==> The data type to store text values or a collection of characters together within the quotations (single, double quotes or backticks)
-let empName = "Bharath";
+let empName = "Naresh";
 let location = "Hyde'r'abad";
-let company = `Microsoft`;
+let company = `B2B Testers`;
 console.log(typeof empName);
 console.log(typeof location);
 console.log(typeof company);
 
-console.log("Emp Name is " + empName + " Emp location is " + location);
-console.log(`Emp name is ${empName} and Emp Location is ${location}`);
+console.log(
+  "Emp Name is " +
+    empName +
+    " Emp location is " +
+    location +
+    ". Working in " +
+    company,
+);
+console.log(
+  `Emp name is ${empName} and Emp Location is ${location}. Working in ${company}`,
+);
 
 //3. boolean ==> The data type to store true or false values
 let x = 10;
@@ -65,13 +74,13 @@ console.log(salary);
 
 //1.object ==> Object data type represents a collection of key-value pairs within the curly braces.
 let person = {
-  name: "Bharath",
+  name: "Naresh",
   empId: 1234,
   visaStatus: true,
   address: {
-    city: "hyderabad",
+    city: "Bellampally",
     state: "TS",
-    zip: 500081,
+    zip: 504251,
   },
 };
 
@@ -79,9 +88,11 @@ person.salary = 100000;
 
 //print the data
 console.log(person.name);
+console.log(person.salary);
 console.log(person.address.city);
 
 console.log(person["name"]);
+console.log(person["salary"]);
 console.log(person.address["city"]);
 
 console.log(person);
