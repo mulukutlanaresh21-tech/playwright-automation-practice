@@ -100,4 +100,4 @@ function loanEligibility(customerName: string, creditScore: number, income: numb
     }
 }
 
-loanEligibility("Jhon Doe", 649, 55000.0, true, 35.0);
+loanEligibility("Jhon Doe", 720, 55000.0, true, 35.0);
