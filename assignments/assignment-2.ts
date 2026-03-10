@@ -6,7 +6,7 @@ if(creditScore > 750){
     console.log("Loan is Approved!");
 }else if(creditScore >= 650){
     console.log("Additional Checks to be performed for Loan Approval");
-}else if(creditScore < 650){
+}else{
     console.log("Loan is Denied");
 }
 
@@ -23,7 +23,7 @@ if(creditScore > 750){
     }else{
         console.log("Loan is Not Considered");
     }
-}else if(creditScore < 650){
+}else {
     console.log("Loan is Denied");
 }
 
@@ -44,7 +44,7 @@ if(creditScore > 750){
     }else{
         console.log("Loan is Not Considered");
     }
-}else if(creditScore < 650){
+}else{
     console.log("Loan is Denied");
 }
 
@@ -71,7 +71,7 @@ if(creditScore > 750){
     }else{
         console.log("Loan is Not Considered");
     }
-}else if(creditScore < 650){
+}else {
     console.log("Loan is Denied");
 }
 
@@ -95,9 +95,9 @@ function loanEligibility(customerName: string, creditScore: number, income: numb
         }else{
             console.log("Loan is Denied for "+customerName);
         }
-    }else if(creditScore < 650){
+    }else {
         console.log("Loan is Denied for "+customerName);
     }
 }
 
-loanEligibility("Jhon Doe", 720, 55000.0, true, 35.0);
+loanEligibility("Jhon Doe", 649, 55000.0, true, 35.0);
