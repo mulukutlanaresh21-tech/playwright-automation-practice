@@ -1,24 +1,25 @@
-let transactions: any[] = [50000, -2000, 3000, -15000, -200, -300, 4000, -3000];
+let transactions: number[] = [50000, -2000, 3000, -15000, -200, -300, 4000, -3000];
 
 let creditTransactions:number = 0;
 let debitTransactions:number = 0;
 let totaCreditAmount:number = 0;
 let totaDebitAmount:number = 0;
 let suspiciousTransCount:number = 0;
-for(let i:number=0; i<transactions.length; i++){
-    if(transactions[i] > 0){
-        if(transactions[i] > 10000){
-            console.log("Suspicious Credit Transaction of Amount: "+ transactions[i]);
+
+for(let transaction of transactions){
+    if(transaction > 0){
+        if(transaction > 10000){
+            console.log("Suspicious Credit Transaction of Amount: "+ transaction);
             suspiciousTransCount++;
         }
-        totaCreditAmount += transactions[i];
+        totaCreditAmount += transaction;
         creditTransactions++;
     }else{
-        if(transactions[i] < -10000){
-            console.log("Suspicious Debit Transaction of Amount: "+ transactions[i]);
+        if(transaction < -10000){
+            console.log("Suspicious Debit Transaction of Amount: "+ transaction);
             suspiciousTransCount++;
         }
-        totaDebitAmount += transactions[i];
+        totaDebitAmount += transaction;
         debitTransactions++;
     }
 }
@@ -29,3 +30,5 @@ console.log("Total Amount Credited in A/c: "+ totaCreditAmount);
 console.log("Total Amount Debited from A/c: "+ totaDebitAmount);
 console.log("Total Remaining Amount in Bank A/c: "+ (totaCreditAmount+totaDebitAmount));
 console.log("Total Number of Suspicious Transactions Count: "+ suspiciousTransCount);
+
+
