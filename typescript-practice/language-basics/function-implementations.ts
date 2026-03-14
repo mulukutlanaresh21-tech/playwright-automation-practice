@@ -87,3 +87,5 @@ function sumOfNumbers(...numbers: number[]): void{
 // calling function
 console.log("Function with rest parameters - sum of numbers");
 sumOfNumbers(1,2,6,8,8);
+sumOfNumbers(1,2,3,4,5);
+sumOfNumbers(1,2,3,4,5,6,7,8,9,10);
