@@ -78,3 +78,17 @@ prices.sort((a,b)=>a-b);//ascending order
 console.log(prices);
 prices.sort((a,b)=>b-a);//descending order
 console.log(prices);
+
+//14. join the values of Array elements
+console.log("14. join the values of Array elements");
+let name: string[] = ["Naresh", "Mahesh", "Arun", "Vinay"];
+console.log(name);
+console.log(name.join(" "));
+console.log(name.join(", "));
+console.log(name.join(" - "));
+
+let age: number[] = [28,26,13,24,31];
+console.log(age);
+console.log(age.join(" "));
+console.log(age.join(", "));
+console.log(age.join(" -> "));
