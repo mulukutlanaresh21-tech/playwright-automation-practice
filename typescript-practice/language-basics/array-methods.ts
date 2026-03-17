@@ -69,7 +69,7 @@ for (let fruit of fruits) {
 
 //12. Reverse the values within the array. 
 console.log("12. Reverse the values within the array. ");
- prices.reverse();
+prices.reverse();
 console.log(prices);
 
 //13. Sort the values within the array. 

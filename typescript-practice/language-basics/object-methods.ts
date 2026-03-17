@@ -80,3 +80,11 @@ let project:projectInfo={
 
 let mergedObject = {...person,...project}; 
 console.log(mergedObject);
+
+
+//13. Convert Array to Object
+console.log("13. Convert Array to Object");
+
+let arr=[["name","Naresh"],["role","SDET"]];
+let obj=Object.fromEntries(arr);
+console.log(obj);
