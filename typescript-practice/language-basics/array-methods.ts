@@ -7,7 +7,7 @@ let prices :number [] = [100, 20, 50, 10];
 let fruitsAndPrices :(string |number) [] = ["Apple",100,"Banana",20,"Cherry",50];
 console.log(fruits);
 console.log(prices);
-console.log(fruitsAndPrices);
+console.log("fruits and prices", fruitsAndPrices);
 
 //2. Access elements from the array
 console.log("2. Access elements from the array")
@@ -78,6 +78,13 @@ prices.sort((a,b)=>a-b);//ascending order
 console.log(prices);
 prices.sort((a,b)=>b-a);//descending order
 console.log(prices);
+
+//with anonymous function
+let num: number[] = [1,8,5,3.5,10,6];
+num.sort(function(a: number, b:number){
+    return a - b
+});
+console.log(num);
 
 //14. join the values of Array elements
 console.log("14. join the values of Array elements");
