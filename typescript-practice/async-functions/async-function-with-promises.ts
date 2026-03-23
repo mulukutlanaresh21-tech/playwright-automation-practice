@@ -25,7 +25,7 @@ function asyncFunctionWithPromiseAndTimeout(): Promise<string> {
          //wait for 10 sec to resolve the promise
         setTimeout((): void => {
             if(randomNumber > 0.5){
-            resolve(`Random Number ${randomNumber} is greater than 0.5`);
+                resolve(`Random Number ${randomNumber} is greater than 0.5`);
             }else{
                 reject(`Random Number ${randomNumber} is less than or equal to 0.5`)
             }
