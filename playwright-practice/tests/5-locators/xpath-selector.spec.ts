@@ -1,4 +1,4 @@
-//Path  : XPath is all about locating the elements by using XML path expressions.
+//Path  : XPath is all about locating the elements by using XML path expressions. 
 
 //Absolute : starts with /
 //Relative : starts with //
@@ -18,6 +18,40 @@
 //Syntax 4: //tagName[starts-with(@attribute,'value')]
 //Syntax 5: //tagName[contains(text(),'value')]
 //Syntax 6: //tagName[starts-with(text(),'value')]
+
+/****************************************************/
+/****LEVEL 3- Combine multiple attributes using AND**/
+/****************************************************/
+//Syntax 7: //tagName[@attribute1='value' and @attribute2='value' and text()='value']
+
+/****************************************************/
+/****LEVEL 4- Advanced Xpath With Relationships******/
+/****************************************************/
+
+//Syntax 8: referenceElementXpath/relationship::targetElementXpath
+
+// target => sibling => parent => ancestor => ancestor's parent
+
+//ancestors parent: //div[@id="footerPanel"]
+//ancestor : //ul
+//parent : //li
+//sibling : NA
+//target : //a[text()="Services"]
+
+//div[@id="footerPanel"]/child::ul/child::li/child::a[text()="Services"]
+//div[@id="footerPanel"]//a[text()="Services"]
+//div[@id="topPanel"]/following-sibling::div//ul/li/a[contains(@href, "/products")]
+//div[@id="mainPanel"]/following-sibling::div//ul/li/a[contains(@href, "/products")] --> footer
+
+//child
+//parent
+//ancestor
+//following-sibling
+//preceding-sibling
+//following
+//preceding
+// / => child
+// // => descendant ==> with in the family
 
 
 import { test, expect } from '@playwright/test';
@@ -44,6 +78,27 @@ test('XPATH selector syntax', async ({ page }) => {
 
     //Locate the 'caption' using syntax 6.
     await page.locator('//p[starts-with(text(),"Experience")]');
+
+    //Locate the 'caption' using syntax 7.
+    await page.locator('//p[@class="caption" and text()="Experience the difference"]');
+
+    //Locate the 'Services' link using syntax 8.
+    await page.locator('//div[@id="footerPanel"]//a[text()="Services"]');
+
+
+    //topPanel Products link --> following-sibling
+    await page.locator('//div[@id="topPanel"]/following-sibling::div//ul/li/a[contains(@href, "/products")]');
+
+    //footermainPanel Products link --> following-sibling
+    await page.locator('//div[@id="mainPanel"]/following-sibling::div//ul/li/a[contains(@href, "/products")]');
+
+    //Logo image  --> preceding-sibling
+    await page.locator('//p[contains(text(), "Experience")]/preceding-sibling::a/img[@class="logo"]');
+
+    //Home image  --> preceding-sibling
+    await page.locator('//div[@id="bodyPanel"]/preceding-sibling::div/ul/li[@class="home"]');
+
+    
 
 
 
