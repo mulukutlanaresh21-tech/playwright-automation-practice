@@ -1,7 +1,8 @@
 //“JavaScript’s == performs type coercion, converting operands to a common type before comparison,
 // which leads to many unexpected results.”
+// In JavaScript, empty array [] is truthy
 // ==  → “adjust & compare”
-// === → “compare as-is”
+// === → “compare as it is”
 
 console.log([] === ![]); //false
 console.log([] == ![]); //true
@@ -18,8 +19,19 @@ console.log([] == ![]); //true
 true
  */
 
+console.log([] === []); //false
+console.log([] == []); //false
+const a = [];
+const b = a;
 
+console.log(a === b); // true
+/*
+Left [] → creates a new array object in memory
+Right [] → creates another new array object
+Both are different references
 
+Even with == (loose equality), arrays are compared by reference, not by value.
+*/
 
 //“Both return false because objects are compared by reference,
 // and two object literals create different memory references.”
@@ -79,7 +91,7 @@ false → 0
 0 == 0 → true
  */
 console.log(!"Naresh" == 0); //true
-console.log(!"Naresh" == '0'); //true
+console.log(!"Naresh" == "0"); //true
 
 /*
 false === 0
@@ -87,5 +99,4 @@ false === 0
 👉 Different types: boolean vs number ==> returns false
  */
 console.log(!"Naresh" === 0); //false
-console.log(!"Naresh" === '0'); //false
-
+console.log(!"Naresh" === "0"); //false
