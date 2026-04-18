@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
+    "test": "playwright test tests/6-webactions-assertions/web-actions-5.spec.ts --headed",
     "smoke": "playwright test --grep \"@smoke\""
   },
   "keywords": [],

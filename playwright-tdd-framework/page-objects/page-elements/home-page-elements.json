@@ -1,0 +1,6 @@
+{
+    "homePageHeaderLink": "//span[text()='Application Hub']",
+    "usersLink": "//span[text()='Users']",
+    "profile":"span[class*='contact-photo']",
+    "logoutLink":"//span[text()='Log out']"
+}

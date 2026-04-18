@@ -1,0 +1,17 @@
+{
+    "app":{
+        "url": "https://accounts.creatio.com/login/alm",
+        "title": "Log in | Creatio",
+        "username": "",
+        "password": ""
+
+    },
+
+    "db":{
+
+    },
+
+    "api":{
+        
+    }
+}
