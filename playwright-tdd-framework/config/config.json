@@ -2,8 +2,8 @@
     "app":{
         "url": "https://accounts.creatio.com/login/alm",
         "title": "Log in | Creatio",
-        "username": "",
-        "password": ""
+        "username": "mulukutlanaresh21@gmail.com",
+        "password": "Nareshkumar@123"
 
     },
 
@@ -12,6 +12,8 @@
     },
 
     "api":{
-        
+        "base_url": "https://api.github.com",
+        "owner": "naresh212nani",
+        "bearer_token": "Bearer"
     }
 }

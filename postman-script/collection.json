@@ -1,0 +1,507 @@
+{
+  "info": {
+    "_postman_id": "134bfc2e-bec6-4301-8bdb-d7f2ba2e4b49",
+    "name": "GitHub API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25192259",
+    "_collection_link": "https://go.postman.co/collection/25192259-134bfc2e-bec6-4301-8bdb-d7f2ba2e4b49?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Creates a duplicate repository for the authenticated user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 422\", function () {\r",
+              "    pm.response.to.have.status(422);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate the reposnse time of duplicate repository request\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains error message\", function () {\r",
+              "    pm.expect(pm.response.json().message).to.eql(\"Repository creation failed.\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains error details\", function () {\r",
+              "    pm.expect(pm.response.json().errors[0].message).to.eql(\"name already exists on this account\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response status is 422\", function () {\r",
+              "    pm.expect(pm.response.json().status).to.eql(\"422\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains error --> resource is Repository\", function () {\r",
+              "    pm.expect(pm.response.json().errors[0].resource).to.eql(\"Repository\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate schema of duplicate repository request response body\", function () {\r",
+              "    pm.expect(typeof pm.response.json().message).to.eql(\"string\");\r",
+              "    pm.expect(Array.isArray(pm.response.json().errors)).to.eql(true);\r",
+              "    pm.expect(typeof pm.response.json().errors[0].resource).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().errors[0].code).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().errors[0].field).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().errors[0].message).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().documentation_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().status).to.eql(\"string\");\r",
+              "});\r",
+              "\r",
+              "//wait for 2 seconds before sending the next request\r",
+              "setTimeout(() =>{\r",
+              "    console.log(\"Waiting for 2 seconds\");\r",
+              "},2000);\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "//Set the repository name as a global variable to access later\r",
+              "pm.globals.set(\"repoName\", \"JMeterRepo\");"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearerToken}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json",
+            "type": "text"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"{{repoName}}\",\r\n    \"description\": \"Sample duplicate Repo from Postman\",\r\n    \"private\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user/repos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "repos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Creates a valid repository for the authenticated user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 201\", function () {\r",
+              "    pm.response.to.have.status(201);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate the reposnse time of Valid repository request\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains the correct repository name\", function () {\r",
+              "    pm.expect(pm.response.json().name).to.eql(\"Playwright-Repo\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains the correct owner\", function () {\r",
+              "    pm.expect(pm.response.json().owner.login).to.eql(\"naresh212nani\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Verify Status of valid repo creation request\", function () {\r",
+              "    pm.expect(pm.response.status).to.eql(\"Created\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate repository visibility\", function () {\r",
+              "    pm.expect(pm.response.json().visibility).to.eql(\"private\");\r",
+              "    pm.expect(pm.response.json().private).to.eql(true);\r",
+              "});\r",
+              "\r",
+              "\r",
+              "pm.test(\"Validate schema of Valid repository request\", function () {\r",
+              "    pm.expect(typeof pm.response.json().id).to.eql(\"number\");\r",
+              "    pm.expect(typeof pm.response.json().node_id).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().name).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().full_name).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().private).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().owner).to.eql(\"object\");\r",
+              "    pm.expect(typeof pm.response.json().owner.login).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().owner.id).to.eql(\"number\");\r",
+              "    pm.expect(typeof pm.response.json().html_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().description).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().fork).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().forks_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().git_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().ssh_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().clone_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().svn_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().visibility).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().has_issues).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().permissions).to.eql(\"object\");\r",
+              "});\r",
+              "\r",
+              "//wait for 2 seconds before sending the next request\r",
+              "setTimeout(() =>{\r",
+              "    console.log(\"Waiting for 2 seconds\");\r",
+              "},2000);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearerToken}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json",
+            "type": "text"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"{{repo}}\",\r\n    \"description\": \"Create Sample Repo from Postman\",\r\n    \"private\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/user/repos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "user",
+            "repos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update the Repository",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate the reposnse time of Update repository request\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains the correct repository name\", function () {\r",
+              "    pm.expect(pm.response.json().name).to.eql(\"Playwright-Repo\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains the correct owner\", function () {\r",
+              "    pm.expect(pm.response.json().owner.login).to.eql(\"naresh212nani\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Verify Status of valid repo creation request\", function () {\r",
+              "    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate repository visibility\", function () {\r",
+              "    pm.expect(pm.response.json().visibility).to.eql(\"public\");\r",
+              "    pm.expect(pm.response.json().private).to.eql(false);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate schema of Valid repository request\", function () {\r",
+              "    pm.expect(typeof pm.response.json().id).to.eql(\"number\");\r",
+              "    pm.expect(typeof pm.response.json().node_id).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().name).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().full_name).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().private).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().owner).to.eql(\"object\");\r",
+              "    pm.expect(typeof pm.response.json().owner.login).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().owner.id).to.eql(\"number\");\r",
+              "    pm.expect(typeof pm.response.json().html_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().description).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().fork).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().forks_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().git_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().ssh_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().clone_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().svn_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().visibility).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().has_issues).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().permissions).to.eql(\"object\");\r",
+              "});\r",
+              "\r",
+              "//wait for 2 seconds before sending the next request\r",
+              "setTimeout(() =>{\r",
+              "    console.log(\"Waiting for 2 seconds\");\r",
+              "},2000);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearerToken}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json",
+            "type": "text"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"private\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "repos",
+            "{{owner}}",
+            "{{repo}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search and get Repo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate the reposnse time of Get repository request\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains the correct repository name\", function () {\r",
+              "    pm.expect(pm.response.json().name).to.eql(\"Playwright-Repo\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Response body contains the correct owner\", function () {\r",
+              "    pm.expect(pm.response.json().owner.login).to.eql(\"naresh212nani\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Verify Status of valid repo creation request\", function () {\r",
+              "    pm.expect(pm.response.status).to.eql(\"OK\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate repository visibility\", function () {\r",
+              "    pm.expect(pm.response.json().visibility).to.eql(\"public\");\r",
+              "    pm.expect(pm.response.json().private).to.eql(false);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate schema of Valid repository request\", function () {\r",
+              "    pm.expect(typeof pm.response.json().id).to.eql(\"number\");\r",
+              "    pm.expect(typeof pm.response.json().node_id).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().name).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().full_name).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().private).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().owner).to.eql(\"object\");\r",
+              "    pm.expect(typeof pm.response.json().owner.login).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().owner.id).to.eql(\"number\");\r",
+              "    pm.expect(typeof pm.response.json().html_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().description).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().fork).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().forks_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().git_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().ssh_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().clone_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().svn_url).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().visibility).to.eql(\"string\");\r",
+              "    pm.expect(typeof pm.response.json().has_issues).to.eql(\"boolean\");\r",
+              "    pm.expect(typeof pm.response.json().permissions).to.eql(\"object\");\r",
+              "});\r",
+              "\r",
+              "//wait for 2 seconds before sending the next request\r",
+              "setTimeout(() =>{\r",
+              "    console.log(\"Waiting for 2 seconds\");\r",
+              "},2000);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearerToken}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json",
+            "type": "text"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "repos",
+            "{{owner}}",
+            "{{repo}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Repository",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 204\", function () {\r",
+              "    pm.response.to.have.status(204);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate the reposnse time of Delete repository request\", function () {\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Validate the response body is empty\", function () {\r",
+              "    pm.expect(pm.response.text()).to.be.empty;\r",
+              "});\r",
+              "\r",
+              "pm.test(\"validate Response Status of Delete request\", function(){\r",
+              "    pm.expect(pm.response.status).to.eql(\"No Content\");\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "{{bearerToken}}",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/vnd.github+json",
+            "type": "text"
+          },
+          {
+            "key": "X-GitHub-Api-Version",
+            "value": "2026-03-10",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{baseUrl}}/repos/{{owner}}/{{repo}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "repos",
+            "{{owner}}",
+            "{{repo}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

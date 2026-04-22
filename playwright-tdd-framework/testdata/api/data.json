@@ -1,0 +1,55 @@
+{
+    "duplicateRepo":{
+        "requestType": "POST",
+        "endPoint": "/user/repos",
+        "body":{
+            "name": "JMeterRepo",
+            "description": "This is a test repository created using Playwright TDD Framework",
+            "private": false
+        },
+        "expectedStatusCode": 422,
+        "expectedStatusMessage":"Unprocessable Entity",
+        "expErrorMessage":"Repository creation failed."
+    },
+
+    "validRepo":{
+        "requestType": "POST",
+        "endPoint": "/user/repos",
+        "body":{
+            "name": "Playwright-Repo",
+            "description": "This is a test repository created using Playwright TDD Framework",
+            "private": true
+        },
+        "expectedStatusCode": 201,
+        "expectedStatusMessage":"Created",
+        "expRepoName":"Playwright-Repo"
+    },
+
+    "updateRepo":{
+        "requestType": "PATCH",
+        "endPoint": "/repos/naresh212nani/Playwright-Repo",
+        "body":{
+            "private": false
+        },
+        "expectedStatusCode": 200,
+        "expectedStatusMessage":"OK",
+        "expRepoName":"Playwright-Repo",
+        "expVisivility": "public"
+    },
+
+    "getRepo":{
+        "requestType": "GET",
+        "endPoint": "/repos/naresh212nani/Playwright-Repo",
+        "expectedStatusCode": 200,
+        "expectedStatusMessage":"OK",
+        "expRepoName":"Playwright-Repo",
+        "expVisivility": "public"
+    },
+
+    "deleteRepo":{
+        "requestType": "DELETE",
+        "endPoint": "/repos/naresh212nani/Playwright-Repo",
+        "expectedStatusCode": 204,
+        "expectedStatusMessage":"No Content"
+    }
+}
