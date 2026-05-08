@@ -1,0 +1,50 @@
+{
+  "Total" : {
+    "transaction" : "Total",
+    "sampleCount" : 800,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 449.04124999999993,
+    "medianResTime" : 414.5,
+    "minResTime" : 342.0,
+    "maxResTime" : 1198.0,
+    "pct1ResTime" : 537.9,
+    "pct2ResTime" : 576.8999999999999,
+    "pct3ResTime" : 924.4700000000005,
+    "throughput" : 48.60857941426662,
+    "receivedKBytesPerSec" : 365.63454133248274,
+    "sentKBytesPerSec" : 15.427527646129544
+  },
+  "Request to Get Repository Details" : {
+    "transaction" : "Request to Get Repository Details",
+    "sampleCount" : 400,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 481.4025000000002,
+    "medianResTime" : 487.0,
+    "minResTime" : 342.0,
+    "maxResTime" : 1198.0,
+    "pct1ResTime" : 556.0,
+    "pct2ResTime" : 667.1499999999994,
+    "pct3ResTime" : 1133.5900000000004,
+    "throughput" : 24.964114086001373,
+    "receivedKBytesPerSec" : 188.65751575859701,
+    "sentKBytesPerSec" : 6.850503963053112
+  },
+  "Request to Update Repository Details" : {
+    "transaction" : "Request to Update Repository Details",
+    "sampleCount" : 400,
+    "errorCount" : 0,
+    "errorPct" : 0.0,
+    "meanResTime" : 416.67999999999984,
+    "medianResTime" : 405.5,
+    "minResTime" : 348.0,
+    "maxResTime" : 820.0,
+    "pct1ResTime" : 448.0,
+    "pct2ResTime" : 469.95,
+    "pct3ResTime" : 787.6800000000003,
+    "throughput" : 26.270852489163275,
+    "receivedKBytesPerSec" : 196.6868452810981,
+    "sentKBytesPerSec" : 9.466742742676999
+  }
+}
